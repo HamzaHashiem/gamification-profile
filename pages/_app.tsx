@@ -1,26 +1,15 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { ThemeProvider } from "@/context/ThemeContext";
-import { useTheme } from "@/context/ThemeContext";
-import { useEffect } from "react";
+import { ThemeProvider } from "@/components/theme-provider"
 
-function ThemedApp({ Component, pageProps }: AppProps) {
-  const { isDarkMode, isThemeLoaded } = useTheme();
-  
-  // Apply theme class to body only after theme is loaded from localStorage
-  useEffect(() => {
-    if (isThemeLoaded) {
-      document.body.className = isDarkMode ? 'dark-mode' : 'light-mode';
-    }
-  }, [isDarkMode, isThemeLoaded]);
-  
-  return <Component {...pageProps} />;
-}
-
-export default function App(props: AppProps) {
+export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider>
-      <ThemedApp {...props} />
+    <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange>
+      <Component {...pageProps} />
     </ThemeProvider>
   );
 }
