@@ -38,6 +38,8 @@ export function Benefits() {
 
 		fetchBenefitsData();
 	}, []);
+	
+	
 	useEffect(() => {
 		if (!benefitsData.length) return;
 		
@@ -69,6 +71,29 @@ export function Benefits() {
 				ease: "power2.out",
 				stagger: 0.1
 			}, "-=0.3");
+
+			benefitItemsRef.current.forEach((card) => {
+				if (card) {
+					const handleMouseEnter = () => {
+						gsap.to(card, {
+							scale: 1.05,
+							duration: 0.3,
+							ease: "power2.out"
+						});
+					};
+
+					const handleMouseLeave = () => {
+						gsap.to(card, {
+							scale: 1,
+							duration: 0.3,
+							ease: "power2.out"
+						});
+					};
+
+					card.addEventListener('mouseenter', handleMouseEnter);
+					card.addEventListener('mouseleave', handleMouseLeave);
+				}
+			});
 
 		}, sectionRef);
 
@@ -111,11 +136,10 @@ export function Benefits() {
 		<section ref={sectionRef} className="benefits-section">
 			<h1 ref={titleRef} className="text-xl sm:text-2xl lg:text-3xl leading-none font-semibold mb-4 sm:mb-6">Benefits</h1>
 			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-				{benefitsData.map((benefit, index) => (
-					<div
+				{benefitsData.map((benefit, index) => (					<div
 						key={benefit.id}
 						ref={el => { benefitItemsRef.current[index] = el; }}
-						className="bg-card text-card-foreground shadow-lg hover:shadow-xl rounded-xl p-4 sm:p-6 flex flex-col items-center transition-all duration-200 h-full hover:scale-105"
+						className="bg-card text-card-foreground shadow-lg hover:shadow-xl rounded-xl p-4 sm:p-6 flex flex-col items-center transition-shadow duration-200 h-full"
 					>
 						<div className="flex-1 flex flex-col items-center text-center">
 							<img
