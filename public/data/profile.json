@@ -1,0 +1,9 @@
+{
+  "id": 1,
+  "name": "John Smith",
+  "level": 42,
+  "currentXP": 2850,
+  "nextLevelXP": 3500,
+  "bio": "Avid gamer and developer, always looking for the next challenge!",
+  "avatar": "https://api.dicebear.com/7.x/icons/svg?seed=Easton"
+}

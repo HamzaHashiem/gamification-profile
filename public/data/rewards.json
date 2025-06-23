@@ -1,0 +1,15 @@
+{
+  "activityProgress": [
+    { "name": "Games Owned", "progress": 75, "total": 100, "color": "#4dabf7" },
+    { "name": "Achievements", "progress": 42, "total": 50, "color": "#36cfcf" },
+    { "name": "Badges", "progress": 8, "total": 10, "color": "#ffd75e" },
+    { "name": "Time Spent", "progress": 120, "total": 200, "color": "#ff9a5e" }
+  ],
+  "latestRewards": [
+    { "id": 1, "name": "Platinum Trophy", "game": "Space Adventure", "date": "2025-06-15", "icon": "🏆" },
+    { "id": 2, "name": "Collection Master", "game": "Fantasy RPG", "date": "2025-06-10", "icon": "🎮" },
+    { "id": 3, "name": "Early Adopter", "game": "System", "date": "2025-06-05", "icon": "🔔" },
+    { "id": 4, "name": "Marathon Player", "game": "Racing Extreme", "date": "2025-05-28", "icon": "⏱️" },
+    { "id": 5, "name": "Social Butterfly", "game": "Community", "date": "2025-05-20", "icon": "🦋" }
+  ]
+}
