@@ -2,6 +2,8 @@
 
 A modern, responsive web dashboard, built using Next.js. This project showcases elegant UI/UX design, gamified elements, and smooth transitions, simulating a premium rewards experience.
 
+![Gamification Dashboard Screenshot](public/screenshot.png)
+
 ## ✨ Features
 
 - 👤 **User Profile Summary**
@@ -49,3 +51,4 @@ A modern, responsive web dashboard, built using Next.js. This project showcases 
    ```
    npm run dev
    ```
+
