@@ -109,7 +109,8 @@ export function Benefits() {
 
 	return (
 		<section ref={sectionRef} className="benefits-section">
-			<h1 ref={titleRef} className="text-xl sm:text-2xl lg:text-3xl leading-none font-semibold mb-4 sm:mb-6">Benefits</h1>			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+			<h1 ref={titleRef} className="text-xl sm:text-2xl lg:text-3xl leading-none font-semibold mb-4 sm:mb-6">Benefits</h1>
+			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
 				{benefitsData.map((benefit, index) => (
 					<div
 						key={benefit.id}

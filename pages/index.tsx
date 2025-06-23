@@ -4,13 +4,7 @@ import { ProfileCard } from '@/components/sections/profile-card';
 import { Rewards } from '@/components/sections/rewards';
 import Head from 'next/head';
 
-type HomeProps = {
-  data: {
-    message: string;
-  };
-};
-
-export default function Home({ data }: HomeProps) {
+export default function Home() {
   return (
     <>
       <Head>
@@ -32,20 +26,4 @@ export default function Home({ data }: HomeProps) {
       </div>
     </>
   );
-}
-
-export async function getServerSideProps() {
-  // from API
-  // const req = await fetch('https://api.example.com/data');
-  // const apiData = await req.json();
-
-  const data = {
-    message: "This is static data fetched at build time."
-  };
-
-  return {
-    props: {
-      data
-    }
-  };
 }
