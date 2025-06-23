@@ -1,59 +1,119 @@
-/**
- * 🎁 Benefits Section (Card Tile Layout)
-● Show tiles or cards for benefits (e.g., discounts, offers, vouchers).
-● Each tile should have a title, icon, description, and CTA (like "Claim" or "View").
- */
-
 import { Button } from "@/components/ui/button";
+import { useRef, useEffect, useState } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-const benefitsData = [
-	{
-		title: "Exclusive Discounts",
-		icon: "https://api.dicebear.com/7.x/icons/svg?seed=discount&backgroundColor=4F46E5",
-		description: "Get up to 50% off on selected items.",
-		cta: "Claim",
-	},
-	{
-		title: "Free Vouchers",
-		icon: "https://api.dicebear.com/7.x/icons/svg?seed=voucher&backgroundColor=4F46E5",
-		description: "Receive vouchers for your next purchase.",
-		cta: "View",
-	},
-	{
-		title: "Early Access",
-		icon: "https://api.dicebear.com/7.x/icons/svg?seed=earlyAccess&backgroundColor=4F46E5",
-		description: "Be the first to try new features and products.",
-		cta: "View",
-	},
-	{
-		title: "Loyalty Points",
-		icon: "https://api.dicebear.com/7.x/icons/svg?seed=loyalty&backgroundColor=4F46E5",
-		description: "Earn points with every purchase and redeem them for rewards.",
-		cta: "View",
-	},
-	{
-		title: "Referral Bonuses",
-		icon: "https://api.dicebear.com/7.x/icons/svg?seed=referral&backgroundColor=4F46E5",
-		description: "Refer friends and earn bonuses for each successful referral.",
-		cta: "Claim",
-	},
-	{
-		title: "Exclusive Content",
-		icon: "https://api.dicebear.com/7.x/icons/svg?seed=content&backgroundColor=4F46E5",
-		description: "Access premium content available only to members.",
-		cta: "Claim",
-	},
-];
+gsap.registerPlugin(ScrollTrigger);
+
+interface Benefit {
+  id: number;
+  title: string;
+  icon: string;
+  description: string;
+  cta: string;
+  category: string;
+}
 
 export function Benefits() {
+	const sectionRef = useRef<HTMLElement>(null);
+	const titleRef = useRef<HTMLHeadingElement>(null);
+	const benefitItemsRef = useRef<(HTMLDivElement | null)[]>([]);
+	
+	const [benefitsData, setBenefitsData] = useState<Benefit[]>([]);
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		const fetchBenefitsData = async () => {
+			try {
+				const response = await fetch('/api/benefits');
+				if (!response.ok) throw new Error('Failed to fetch benefits data');
+				const data = await response.json();
+				setBenefitsData(data);
+			} catch (error) {
+				console.error('Error fetching benefits data:', error);
+			} finally {
+				setLoading(false);
+			}
+		};
+
+		fetchBenefitsData();
+	}, []);
+	useEffect(() => {
+		if (!benefitsData.length) return;
+		
+		const ctx = gsap.context(() => {
+			gsap.set([titleRef.current, benefitItemsRef.current], {
+				opacity: 0,
+				y: 30
+			});
+
+			const tl = gsap.timeline({
+				scrollTrigger: {
+					trigger: sectionRef.current,
+					start: "top 80%",
+					end: "bottom 20%",
+					toggleActions: "play none none reverse"
+				}
+			});
+
+			tl.to(titleRef.current, {
+				opacity: 1,
+				y: 0,
+				duration: 0.8,
+				ease: "power2.out"
+			})
+			.to(benefitItemsRef.current, {
+				opacity: 1,
+				y: 0,
+				duration: 0.6,
+				ease: "power2.out",
+				stagger: 0.1
+			}, "-=0.3");
+
+		}, sectionRef);
+
+		return () => ctx.revert();
+	}, [benefitsData]);
+
+	if (loading) {
+		return (
+			<section className="benefits-section">
+				<div className="h-8 bg-muted rounded w-32 mb-6 animate-pulse"></div>
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+					{[...Array(6)].map((_, i) => (
+						<div key={i} className="bg-card rounded-xl p-6 shadow-lg animate-pulse">
+							<div className="w-20 h-20 bg-muted rounded-lg mb-4 mx-auto"></div>
+							<div className="h-6 bg-muted rounded mb-3"></div>
+							<div className="space-y-2 mb-6">
+								<div className="h-4 bg-muted rounded"></div>
+								<div className="h-4 bg-muted rounded w-3/4"></div>
+							</div>
+							<div className="h-10 bg-muted rounded"></div>
+						</div>
+					))}
+				</div>
+			</section>
+		);
+	}
+
+	if (!benefitsData.length) {
+		return (
+			<section className="benefits-section">
+				<h1 className="text-xl sm:text-2xl lg:text-3xl leading-none font-semibold mb-4 sm:mb-6">Benefits</h1>
+				<div className="text-center text-muted-foreground">
+					Failed to load benefits data
+				</div>
+			</section>
+		);
+	}
+
 	return (
-		<section className="benefits-section">
-			<h1 className="text-xl sm:text-2xl lg:text-3xl leading-none font-semibold mb-4 sm:mb-6">Benefits</h1>
-			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-				{/* The icon should be large and take the first half of the card, then below it the title, description, and CTA button. */}
+		<section ref={sectionRef} className="benefits-section">
+			<h1 ref={titleRef} className="text-xl sm:text-2xl lg:text-3xl leading-none font-semibold mb-4 sm:mb-6">Benefits</h1>			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
 				{benefitsData.map((benefit, index) => (
 					<div
-						key={index}
+						key={benefit.id}
+						ref={el => { benefitItemsRef.current[index] = el; }}
 						className="bg-card text-card-foreground shadow-lg hover:shadow-xl rounded-xl p-4 sm:p-6 flex flex-col items-center transition-all duration-200 h-full hover:scale-105"
 					>
 						<div className="flex-1 flex flex-col items-center text-center">

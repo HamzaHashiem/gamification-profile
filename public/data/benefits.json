@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "title": "Exclusive Discounts",
+    "icon": "https://api.dicebear.com/7.x/icons/svg?seed=discount&backgroundColor=4dabf7",
+    "description": "Get up to 50% off on selected items.",
+    "cta": "Claim",
+    "category": "discount"
+  },
+  {
+    "id": 2,
+    "title": "Free Vouchers",
+    "icon": "https://api.dicebear.com/7.x/icons/svg?seed=voucher&backgroundColor=36cfcf",
+    "description": "Receive vouchers for your next purchase.",
+    "cta": "View",
+    "category": "voucher"
+  },
+  {
+    "id": 3,
+    "title": "Early Access",
+    "icon": "https://api.dicebear.com/7.x/icons/svg?seed=earlyAccess&backgroundColor=ffd75e",
+    "description": "Be the first to try new features and products.",
+    "cta": "View",
+    "category": "access"
+  },
+  {
+    "id": 4,
+    "title": "Loyalty Points",
+    "icon": "https://api.dicebear.com/7.x/icons/svg?seed=loyalty&backgroundColor=ff9ec3",
+    "description": "Earn points with every purchase and redeem them for rewards.",
+    "cta": "View",
+    "category": "points"
+  },
+  {
+    "id": 5,
+    "title": "Referral Bonuses",
+    "icon": "https://api.dicebear.com/7.x/icons/svg?seed=referral&backgroundColor=ff9a5e",
+    "description": "Refer friends and earn bonuses for each successful referral.",
+    "cta": "Claim",
+    "category": "referral"
+  },
+  {
+    "id": 6,
+    "title": "Exclusive Content",
+    "icon": "https://api.dicebear.com/7.x/icons/svg?seed=content&backgroundColor=4F46E5",
+    "description": "Access premium content available only to members.",
+    "cta": "Claim",
+    "category": "content"
+  }
+]
